@@ -86,18 +86,17 @@ print(disasterVectors_test[0].todense().shape)
 print(disasterVectors_test[0].todense())
 
 from sklearn.ensemble import GradientBoostingClassifier
-learning_rates = [0.01,0.03,0.1,0.3,1]
-depths = range(1,15)
-result = []
+learning_rates = [0.3]     # to get the best possible output as of now use (learning_rate,depth) : [(0.3,4) or (0.1,9)]
+depths = [4]
+sample_submission = pd.read_csv("sample_submission.csv")
 
 for learning_rate in learning_rates:
     for depth in depths:
         for_list = []
         gbrt = GradientBoostingClassifier(random_state=0,learning_rate=learning_rate,max_depth=depth)
         gbrt.fit(disasterVectors_train,disasterTrain.target)
-        scores = model_selection.cross_val_score(gbrt, disasterVectors_train,disasterTrain.target, cv=3)
-        for_list = [learning_rate,depth,scores,round(gbrt.score(disasterVectors_train,disasterTrain.target),3)]
-        result.append(for_list)
+        sample_submission["target"] = gbrt.predict(disasterVectors_test)
+
 
 for i in result:
     print(i,'\n')
