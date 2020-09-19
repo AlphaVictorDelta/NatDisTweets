@@ -125,6 +125,8 @@ print(disasterVectors_train[0].todense())
 print(disasterVectors_test[0].todense().shape)
 print(disasterVectors_test[0].todense())
 
+print(disasterTrain)
+print(disasterTest)
 
 # Save dataframes locally to avoid running this code again and again
 disasterTrain.to_csv (r'C:\Users\Akshay Desai\Desktop\All Projects\Real or Not\disasterTrain.csv', index = False, header=True)
